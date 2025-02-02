@@ -14,6 +14,18 @@ export enum ContactType {
   Phone = "phone",
 }
 
+export enum ContactIcon {
+  Github = "GitHub",
+  Email = "Email",
+  LinkedIn = "LinkedIn",
+  Phone = "Phone",
+}
+
+export interface DescriptionProps {
+  title: string
+  description: string;
+}
+
 export interface Project {
   id: string;
   name: string;
@@ -26,7 +38,9 @@ export interface Contact {
   type: ContactType[];
   value: string;
   displayName?: string;
-  icon?: string;
+  icon?: ContactIcon;
 }
+
+
 
 export type ProjectWithoutId = Omit<Project, 'id'>;
