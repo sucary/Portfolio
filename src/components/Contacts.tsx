@@ -1,43 +1,52 @@
 import React, { useEffect, useState } from 'react';
-import { Contact } from '../types';
+import { Contact, ContactType } from '../types';
 import { getAllContact } from '../services/contactService';
-
+import { Box, IconButton, Typography } from '@mui/material';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import LinkedInIcon from '@mui/icons-material/LinkedIn';
+import EmailIcon from '@mui/icons-material/Email';
+import SmartphoneIcon from '@mui/icons-material/Smartphone';
 
 const Contacts = () => {
-
-  const [contact, setContact] = useState<Contact[]>([]);
-  const [error, setError] = useState<string | null>(null);
+  const [contacts, setContacts] = useState<Contact[]>([]);
 
   useEffect(() => {
-    // Fetch projects when the component mounts
-    const fetchContact = async () => {
-      try {
-        const data = await getAllContact();
-        setContact(data);
-      } catch {
-        setError('Failed to fetch contact');
-      }
-    };
-
-    fetchContact();
+    getAllContact().then(setContacts).catch(console.error);
   }, []);
 
-  if (error) {
-    return <div>{error}</div>;
-  }
+  const renderIcon = (type: ContactType) => {
+    switch (type) {
+      case ContactType.Github:
+        return <GitHubIcon />;
+      case ContactType.LinkedIn:
+        return <LinkedInIcon />;
+      case ContactType.Email:
+        return <EmailIcon />;
+      case ContactType.Phone:
+        return <SmartphoneIcon />;
+      default:
+        return null;
+    }
+  };
 
   return (
-    <div>
-      <h3>contact</h3>
-      {contact.map((contact: Contact) => (
-        <div>
-          <p>{contact.type}</p>
-          <p>{contact.value}</p>
-          <p>{contact.displayName}</p>
-          <p>{contact.icon}</p>
-        </div>
-      ))}
-    </div>
+    <Box className="section">
+      <Typography variant="h4">Contacts</Typography>
+      <Box className="contacts-container">
+        {contacts.map((contact, index) => (
+          <div key={index} className="contact-item">
+            <IconButton
+              onClick={() => window.open(contact.value, '_blank')}
+              color="primary"
+              size="large"
+            >
+              {contact.type[0] && renderIcon(contact.type[0])}
+            </IconButton>
+            <Typography>{contact.displayName}</Typography>
+          </div>
+        ))}
+      </Box>
+    </Box>
   );
 };
 
