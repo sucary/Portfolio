@@ -1,30 +1,26 @@
 import { Link } from 'react-router-dom';
-import React, { CSSProperties } from 'react';
+import { Box, Typography } from '@mui/material';
 
 const Header = () => {
   return (
-    <header style={styles.header}>
-      <Link to="/" style={styles.link}>
-        <h1 style={styles.title}>My App</h1>
+    <Box
+      component="header"
+      sx={{
+        position: 'fixed',
+        top: 0,
+        width: '100%',
+        backgroundColor: 'background.paper',
+        padding: '1rem 0',
+        zIndex: 1100,
+      }}
+    >
+      <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+        <Typography variant="h4" component="h1">
+          sucary
+        </Typography>
       </Link>
-    </header>
+    </Box>
   );
-};
-
-const styles: { [key: string]: CSSProperties } = {
-  header: {
-    backgroundColor: '#282c34',
-    padding: '1rem',
-    textAlign: 'center',
-  },
-  link: {
-    textDecoration: 'none',
-    color: 'white',
-  },
-  title: {
-    margin: 0,
-    fontSize: '2rem',
-  },
 };
 
 export default Header;

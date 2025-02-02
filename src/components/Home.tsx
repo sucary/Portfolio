@@ -1,24 +1,23 @@
 import React from 'react';
+import { Box } from '@mui/material';
 import Description from "./Description";
 import Header from "./Header";
 import Projects from "./Projects";
-
-import { descriptions } from "../data/descriptions";
 import Contacts from "./Contacts";
-
-
+import { descriptions } from "../data/descriptions";
 
 const Home = () => {
-
-
   return (
-    <div>
+    <Box>
       <Header />
-      <Description description = {descriptions.en.description}/>
+      <Description 
+        title={descriptions.en.title}
+        description={descriptions.en.description}
+      />
       <Projects />
       <Contacts />
-    </div>
-  )
+    </Box>
+  );
 };
 
 export default Home;

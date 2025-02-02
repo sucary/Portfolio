@@ -1,26 +1,17 @@
 import React from 'react';
-
 import { Box, Typography } from '@mui/material';
+import { DescriptionProps } from '../types';
 
-interface DescriptionProps {
-  description: string;
-}
-
-const Description: React.FC<DescriptionProps> = ({ description }) => {
+const Description: React.FC<DescriptionProps> = ({ title, description }) => {
   return (
-    <Box
-      sx={{
-        margin: '32px 0',
-      }}
-    >
-      <Typography
-        variant="body1" // You can change this to any variant (e.g., 'body2', 'h6', etc.)
-        whiteSpace="pre-line" // Line breaks
-      >
+    <Box className="section">
+      <Typography variant="h3" gutterBottom>
+        {title}
+      </Typography>
+      <Typography variant="body1" className="description-text">
         {description}
       </Typography>
     </Box>
-
   );
 };
 
